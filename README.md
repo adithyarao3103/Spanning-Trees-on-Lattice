@@ -22,7 +22,7 @@ where $D$ is the degree matrix, which is a diagonal matrix stating how many conn
 
 [enumerateAllTrees.nb](enumerateAllTrees.nb) ([enumereAllTrees.pdf](enumerateAllTrees.pdf)) contains the Mathematica implementation of the following pseudocode for enumerating all spanning trees on an arbitrary hypercubic lattice.
 
-```mathematica
+```
 tree = collection of the spanning tree, visited sites, checked sites, along with the information if the spanning tree is completed or not.
 
 While there is atleast one incomplete tree in the set of trees:
@@ -46,7 +46,7 @@ While there is atleast one incomplete tree in the set of trees:
 
 [gaugeTransformation.nb](gaugeTransformation.nb) ([gaugeTransformation.pdf](gaugeTransformation.pdf)) contains the Mathematica code, based on the following pseudocode, for obtaining the local gauge transformation needed to transform a given spanning tree into another spanning tree.
 
-```mathematica
+```
 modifiedLinks = the links of the gauge transformed lattice, set according to the first tree
 toAdd = tree2 - tree1; i.e. the set of links in tree2 and not in tree1, and therefore to be added to tree1
 gaugeTransformation = I; initialise the gauge transformation to the identity.
