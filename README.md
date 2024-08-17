@@ -22,8 +22,8 @@ where $D$ is the degree matrix, which is a diagonal matrix stating how many conn
 
 [enumerateAllTrees.nb](enumerateAllTrees.nb) ([enumereAllTrees.pdf](enumerateAllTrees.pdf)) contains the Mathematica implementation of the following pseudocode for enumerating all spanning trees on an arbitrary hypercubic lattice.
 
-```mma
-tree = collection of the spanning tree, visited sites, checked sites, along with the information if the spanning tree is completed or not.
+```
+<code style="color : red">tree</code> = collection of the spanning tree, visited sites, checked sites, along with the information if the spanning tree is completed or not.
 
 While there is atleast one incomplete tree in the set of trees:
     For each tree in the set of trees:
