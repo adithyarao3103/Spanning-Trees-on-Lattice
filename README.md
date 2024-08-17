@@ -9,9 +9,11 @@ This repository contains the Mathematica notebooks for
 This code is based on the Matrix Tree Theorem of Kirchhoff, which states that given a connected graph (of which the lattice we consider is also an example), the number of spanning trees of the graph is given by any cofactor of the Laplacian matrix for the graph.
 
 The Laplacian Matrix of a graph is given as 
+
 $$
-    Q = D - A
+Q = D - A
 $$
+
 where $D$ is the degree matrix, which is a diagonal matrix stating how many connections start or end at the $i^{th}$ node, and $A = \{a_{ij}\}$ is the adjacency matrix, which is valued $a_{ij} =1$ if $i^{th}$ and $j^{th}$ nodes have a connection between them, and 0 otherwise.
 
 [countingTrees.nb](countingTrees.nb) ([countingTrees.pdf](countingTrees.pdf)) contains the Mathematica code counting the number of spanning trees on an arbitrary hypercubic lattice.
