@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+	<title>Adithya A Rao | Game of Life</title>
+	<link rel="stylesheet" type="text/css" href="/Spanning-Trees-on-Lattice/assets/main.css">
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script> <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	
+</head>
+<body>
+	<div id="main-cont">
+		
+		<center id="desc">
+			<h1>Spanning Tree Gauge Fixing</h1>
+			<div id="content">
+				A lattice gauge theory is a formulation of quantum field theory in which spacetime is discretized into a grid, or a lattice, allowing gauge fields and particles to interact at discrete points. In this setup, continuous space and time is replaced by a finite set of points connected by links. The particles live on the lattice sites, and the gauge fields that mediate the interaction between the particles reside on the links between the lattice sites. <br><br>
+				Gauge field theories are characterized by 'local gauge invariance', which, in non-technical terms, mean that we can change the gauge fields values on individual links in certain ways without changing the overall physics. This is due to the fact that the physical content of the theory only depends on the value of the plaquette and not the individual links, therefore if we modify the link values while keeping the plaquettes same, it will not alter the physics. Here, plaquettes refer to the smallest closed loops on the lattice, formed by four links that make a square, as shown below
+				<center><img src="/Spanning-Trees-on-Lattice/assets/plaquette.png" alt="plaquette" width="400"></center>
+				A local gauge transformation therefore refers to modifying the links such that every plaquette value is unchanged. <br><br>
+				Observables on the lattice are simply given by certain products of links, and therefore can be represented by paths on the lattice. Physically relevant observables are usually made of continuous paths. <br>
+				A local gauge transformation will not change an observable if the path of the observable forms a closed loop. 
+				But there are a few physically relevant and interesting observables which are not closed loops, and therefore in order to study the physics of these observables we need to fix the gauge. 
+				By fixing the gauge, we mean selecting only one of the possible local gauge transformations as the "representing" state for all of the equivalent states. <br><br>
+
+				A spanning tree is one of the gauge fixing techniques that can be used to fix the gauge. A spanning tree is a subset of the links of the lattice such that it connects all the sites of the lattice, while having no loops at all. One can fix the gauge by choosing a spanning tree and modifying the links such that the links in the spanning tree are set to $\mathbb{I}$ (identity). <br><br>
+
+				
+				<div id="sandbox-describe">
+					Below is the visualization of an algorithm to generate a random spanning tree gauge fixing on the lattice. The gauge theory in consideration is a $U(1)$ theory, meaning every link has a complex number value. The lattice has periodic  boundary conditions, meaning that the last element of a row (column) is connected to the first element in the same row (column). <br><br>
+					'Run' generates the tree, 'Pause' pauses the generation, 'Reset' resets the lattice to a random unfixed state, and 'Re-initialize' redraws the lattice in case of a changed number of rows. You can see that in each step how the link values change, but the plaquette values (in bold) remain the same.
+				</div>
+
+				<center id="sandbox">
+					<h2>Sandbox</h2>
+					<div id="sandbox-cont">
+						<div id="sb-left">
+							<div id="board" class="board"></div>
+							<label for="myCheckbox">Show Values</label><input type="checkbox" id="myCheckbox" checked>
+							<div id="controls" class="controls">
+								<div id="init">
+									<label for="number">Number of rows</label>
+									<input type="number" id="number" value="6" max="10"></input>
+									<button onclick="initialize()">Re-initialize</button>
+									<button onclick="clearBoard()">Reset Lattice</button>
+								</div>
+								<div id="runs">
+								<!-- <button onclick="synchronous()">Synchronous Run</button> -->
+									<button onclick="start()">Run</button>
+									<button onclick="stop()">Pause</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</center>
+			</div>
+			<h2>Mathematical details</h2>
+			<div id="content">
+				Mathematically, a lattice (pure) gauge theory is simply a lattice with group elements distributed over the links $L((i_1, j_1), (i_2, j_2)) \equiv L((i_2, j_2), (i_1, j_1))^{-1}$ connecting two neighboring sites $(i_1, j_1)~\&~(i_2, j_2)$. For the time being, you can simply consider a group to be a set of matrices satisfying some specific properties. In the above algorithm, we have considered the $U(1)$ group elements which are simply complex numbers $a+ib$ with unit modulus, i.e. $a^2 + b^2 = 1$<br><br>
+				The physics of the system depends on the plaquette values, where a plaquette is defined as the product
+				$$
+					P(i, j) = L((i, j), (i+1, j))L((i+1, j), (i+1, j+1))L((i+1, j+1), (i, j+1))L((i, j+1), (i, j))
+				$$
+				Local gauge freedom simply means that we can assign any gauge group elements $G(i, j)$ to the sites too, which modifies the links as follows:
+				$$
+					L((i_1, j_1), (i_2, j_2)) \rightarrow G(i_1, j_1)L((i_1, j_1), (i_2, j_2))G(i_2, j_2)^{-1}
+				$$
+				This transformation leaves the plaquette values unchanged, since the $G$s cancel with $G^{-1}$s, therefore preserving the physics of the system. <br><br>
+				Fixing the gauge simply means imposing conditions on the link elements so that all the equivalent configurations are mapped to a single 'representing' configuration. <br><br>
+
+				To read more about spanning tree gauge fixing, see <a href="/Spanning-Trees-on-Lattice/Spanning_Trees_on_a_Lattice.pdf">this report</a>.	
+
+				<h3>Algorithm For Performing the Spanning Tree Gauge Fixing</h3>
+				<ol>
+					<li>Start with a random site. Look for all its neighbors.</li>
+					<li>Choose randomly a few of the neighbors of the site, and modify the group elements at these sites to be equal to $L^{-1}$ (or $L$ depending on where it is). This will set these links to $1$</li>
+					<li>This modification of the gauge element at the newly added sites should also alter the values of the links connected to them. Do this transformation.<br> Once this is done, we have absorbed the information of the group element on the site into the link variables. Therefore, reset the group element at the site to $1 + i0$ </li>
+					<li>Repeat the same, every time looking for the (unfixed) neighbors of all the added elements and randomly selecting a few.</li>
+				</ol>
+			</div>
+		</center>
+	</div>
+</body>
+<script type="text/javascript" src="/Spanning-Trees-on-Lattice/assets/main.js"></script>
+</html>
