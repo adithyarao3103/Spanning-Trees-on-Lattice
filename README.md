@@ -41,6 +41,7 @@ While there is atleast one incomplete tree in the set of trees:
     Delete duplicates from the set trees
     Replace the current set of trees with the set of new trees
 ```
+Find an interactive version for generating 'one' random spanning tree for the case of $U(1)$ lattice gauge theory [here](https://adithyarao3103.github.io/Spanning-Trees-on-Lattice)
 
 ---
 
