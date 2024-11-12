@@ -5,17 +5,23 @@ var n;
 var gen=0;
 var iter=0;
 
-checkbox = document.getElementById('myCheckbox');
+lcheckbox = document.getElementById('linkCheckbox');
+pcheckbox = document.getElementById('plaqCheckbox');
 
-document.getElementById('myCheckbox').addEventListener('change', function(e) {
-	toggleValues(e.target.checked);
+document.getElementById('linkCheckbox').addEventListener('change', function(e) {
+	toggleLinks(e.target.checked);
 });
 
-function toggleValues(action){
+document.getElementById('plaqCheckbox').addEventListener('change', function(e) {
+	togglePlaquettes(e.target.checked);
+});
+
+
+
+function toggleLinks(action){
 	lefts = document.getElementsByClassName('left')
 	tops = document.getElementsByClassName('top')
-	centers = document.getElementsByClassName('center');
-	elems = [...lefts, ...tops, ...centers];
+	elems = [...lefts, ...tops];
 	if (action == true){
 		for(let elem of elems){
 			elem.style.visibility = 'visible';
@@ -24,6 +30,20 @@ function toggleValues(action){
 	else{
 		for(let elem of elems){
 			elem.style.visibility = 'hidden';
+		}
+	}
+}
+
+function togglePlaquettes(action){
+	plaquettes = document.getElementsByClassName('center');
+	if (action == true){
+		for(let plaquette of plaquettes){
+			plaquette.style.visibility = 'visible';
+		}
+	}
+	else{
+		for(let plaquette of plaquettes){
+			plaquette.style.visibility = 'hidden';
 		}
 	}
 }
@@ -102,7 +122,8 @@ function drawBoard(){
 		}
 	}
 	board.innerHTML = tiles;
-	toggleValues(checkbox.checked);
+	toggleLinks(lcheckbox.checked);
+	togglePlaquettes(pcheckbox.checked);
 }
 
 function clearBoard(){

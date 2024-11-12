@@ -115,7 +115,7 @@ button:hover{
 	grid-template-columns: repeat(21, 1fr);
 }
 
-#myCheckbox{
+#linkCheckbox, #plaqCheckbox{
 	accent-color: black;
 }
 
